@@ -1,6 +1,7 @@
 require('./config/config');
 
 const express = require('express')
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
 const app = express();
@@ -11,30 +12,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/usuarios', function(req, res) {
-    res.json('get Usuarios')
-});
+// Requerir y usar el recurso routes/usuario.js
+app.use(require('./routes/usuario'));
 
-app.post('/usuarios', function(req, res) {
+mongoose.connect(process.env.URLBD, { useNewUrlParser: true }, (err, resp) => {
 
-    let body = req.body;
+    if (err) throw err;
 
-    res.json({
-        persona: body
-    })
+    console.log('Base de datos ONLINE port 27017');
 
-});
-
-app.put('/usuarios/:id', function(req, res) {
-
-    let id = req.params.id
-    res.json({
-        id: id
-    })
-});
-
-app.delete('/usuarios', function(req, res) {
-    res.json('delete Usuarios')
 });
 
 app.listen(process.env.PORT, () => {
