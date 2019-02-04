@@ -5,6 +5,12 @@ const User = require('../models/usuario')
 
 const app = express();
 
+app.get('/', function(req, res) {
+    res.json({
+        message: 'Iniciando los servicios REST, para comenzar a consumirlos, utilizar los servicios GET, POST, UPDATE, DELETE con la ruta /usuarios'
+    });
+})
+
 app.get('/usuarios', function(req, res) {
 
     let desde = req.query.desde || 0;
