@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-// Requerir y usar el recurso routes/usuario.js
-app.use(require('./routes/usuario'));
+// Configurando las rutas globales
+app.use(require('./routes/routes'));
 
 mongoose.connect(process.env.URLBD, { useNewUrlParser: true }, (err, resp) => {
 
